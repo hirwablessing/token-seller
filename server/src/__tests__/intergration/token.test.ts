@@ -12,7 +12,7 @@ const tokenStructor = {
 	status: expect.any(String),
 };
 
-describe("Post API", () => {
+describe("Token API", () => {
 	describe("GET /api/tokens", () => {
 		it("Should return tokens", async () => {
 			const { statusCode, body, headers } = await request(
@@ -33,7 +33,7 @@ describe("Post API", () => {
 		});
 	});
 
-	// const { statusCode, body } = await request(`${serverURL}/api/posts`, {
+	// const { statusCode, body } = await request(`${serverURL}/api/tokens`, {
 	//         method: "POST",
 	//         headers: {
 	//           "Content-Type": "application/json",

@@ -1,50 +1,61 @@
-import faker from "@faker-js/faker";
 import { request } from "undici";
 import { createTestServer } from "../../utils/test-utils";
 
+
 const { serverURL, prisma } = createTestServer();
 
-const meterStructor = {
-	id: expect.any(Number),
-	number: expect.any(String),
-	days: expect.any(Number),
+const meterStructure = {
+    id: expect.any(Number),
+    number: expect.any(String),
+    days: expect.any(Number),
 };
 
-describe("Post API", () => {
-	describe("GET /api/meters", () => {
-		it("Should return meters", async () => {
-			const { statusCode, body, headers } = await request(
-				`${serverURL}/api/meters`
-			);
+beforeAll(async () => {
+    await prisma.meter.create({
+        data: {
+            number: "103434",
+            days: 10
+        },
+    });
 
-			const respData = await body.json();
+    console.log("✨ inserted Posts into database");
+});
 
-			expect(headers["content-type"]).toMatch(
-				/application\/json/
-			);
+describe("Meter API", () => {
+    describe("GET /api/meters", () => {
+        it("Should return meters", async () => {
+            const { statusCode, body, headers } = await request(
+                `${serverURL}/api/meters`
+            );
 
-			expect(statusCode).toBe(200);
+            const respData = await body.json();
 
-			for (const meters of respData) {
-				expect(meters).toMatchObject(meterStructor);
-			}
-		});
-	});
+            expect(headers["content-type"]).toMatch(
+                /application\/json/
+            );
 
-	// const { statusCode, body } = await request(`${serverURL}/api/posts`, {
-	//         method: "POST",
-	//         headers: {
-	//           "Content-Type": "application/json",
-	//         },
-	//         body: JSON.stringify({
-	//           content: faker.lorem.paragraph(),
-	//           title: faker.lorem.sentence(),
-	//           authorId: 1,
-	//         }),
-	//       });
+            expect(statusCode).toBe(200);
 
-	//       const respData = await body.json();
+            for (const meters of respData) {
+                expect(meters).toMatchObject(meterStructure);
+            }
+        });
+    });
 
-	//       expect(statusCode).toBe(201);
-	//       expect(typeof respData).toBe("object");
+    describe("GET /api/meters/by-number/:number", () => {
+        it("should return a meter number on success ", async () => {
+            const { statusCode, body, headers } = await request(
+                `${serverURL}/api/meters/by-number/103434`
+            );
+
+            const respData = await body.json();
+
+            expect(headers["content-type"]).toMatch(
+                /application\/json/
+            );
+
+            expect(statusCode).toBe(200);
+            expect(respData).toMatchObject(meterStructure)
+        })
+    })
 });
