@@ -1,4 +1,4 @@
-# Vite + React + Tailwind CSS starter
+# Token seller
 
 Inspired by [posva's](https://github.com/posva) [vite-tailwind-starter](https://github.com/posva/vite-tailwind-starter)
 
@@ -17,8 +17,8 @@ yarn add @tailwindcss/ui
 module.exports = {
   // ...
   // rest of the config
-  plugins: [require('@tailwindcss/ui')],
-}
+  plugins: [require("@tailwindcss/ui")],
+};
 ```
 
 ## Installation
