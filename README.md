@@ -38,3 +38,9 @@ yarn dev
 ```sh
 yarn build
 ```
+
+## Tests
+
+```sh
+yarn test
+```
