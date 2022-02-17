@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getMeterBalance } from "../../all_services";
 import Header from "../components/Header";
+import { getMeterBalance } from "../services/all_services";
 
 const Balance = () => {
   const [meter, setMeter] = useState({
@@ -20,7 +20,7 @@ const Balance = () => {
     }));
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
     e.preventDefault();
     const res = await getMeterBalance(meter.meterNumber);
 

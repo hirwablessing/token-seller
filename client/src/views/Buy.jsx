@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { addtMeterBalance } from "../../all_services";
 import Header from "../components/Header";
+import { addtMeterBalance } from "../services/all_services";
 
 const Buy = () => {
   const [meter, setMeter] = useState({
     meterNumber: "",
-    amount: 0,
+    amount: 1,
   });
 
   const [errors, setErrors] = useState({
@@ -23,7 +23,7 @@ const Buy = () => {
   }
 
   useEffect(() => {
-    if (meter.amount % 100 == 0 && meter.amount < 182500) {
+    if (meter.amount % 100 === 0 && meter.amount < 182500) {
       setErrors((prev) => ({
         ...prev,
         amount: "",
@@ -81,6 +81,7 @@ const Buy = () => {
                     onChange={(e) => handleChange(e.target)}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     name="meterNumber"
+                    id="meterNumber"
                     type="number"
                     pattern="[0-8]*"
                     required
@@ -103,6 +104,7 @@ const Buy = () => {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Amount"
                     name="amount"
+                    id="amount"
                     type="number"
                     pattern="[0-9]*"
                     required
