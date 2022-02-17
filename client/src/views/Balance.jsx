@@ -22,9 +22,13 @@ const Balance = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await getMeterBalance(meter.meterNumber);
+    try {
+      const res = await getMeterBalance(meter.meterNumber);
 
-    setBalance(res);
+      setBalance(res);
+    } catch (error) {
+      alert("Something went wrong");
+    }
   }
 
   useEffect(() => {

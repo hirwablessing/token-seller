@@ -50,8 +50,13 @@ const Buy = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await addtMeterBalance();
-    setToken(res);
+    try {
+      const res = await addtMeterBalance(meter);
+      alert("Meter bought successfully");
+      setToken(res);
+    } catch (error) {
+      alert("Failed to buy meter");
+    }
   }
 
   return (

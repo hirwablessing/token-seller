@@ -6,7 +6,7 @@ export default function routes(app: Express) {
   app.get("/", (req: Request, res: Response) => res.sendStatus(200));
 
   app.get("/api/tokens", (req, res) => getAllTokens(req, res));
-  app.get("/api/meters/getBynumber/{number}", (req, res) =>
+  app.get("/api/meters/getByNumber/{number}", (req, res) =>
     findByMeterNumber(req, res)
   );
 
