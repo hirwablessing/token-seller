@@ -1,0 +1,12 @@
+POST http://localhost:8000/api/products
+Content-Type: application/json
+
+{
+  "name": "Inka fdfdfd"
+}
+
+###
+GET http://localhost:8000/api/products
+Accept: application/json
+
+###

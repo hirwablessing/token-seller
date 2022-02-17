@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { addtMeterBalance } from "../../all_services";
 import Header from "../components/Header";
 
 const Buy = () => {
@@ -11,6 +12,8 @@ const Buy = () => {
     meterNumber: "",
     amount: "",
   });
+
+  const [token, setToken] = useState("");
 
   function handleChange(e) {
     setMeter((prev) => ({
@@ -45,6 +48,12 @@ const Buy = () => {
     }
   }, [meter.amount, meter.meterNumber]);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const res = await addtMeterBalance();
+    setToken(res);
+  }
+
   return (
     <React.Fragment>
       <Header title="Buy" />
@@ -52,7 +61,11 @@ const Buy = () => {
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
             <div className="w-full max-w-md pt-7">
-              <form className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
+              {token && <p className="pb-32">{`Token bought=> ${token} `}</p>}
+              <form
+                className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4"
+                onSubmit={handleSubmit}
+              >
                 <div className="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
                   T-seller
                 </div>
